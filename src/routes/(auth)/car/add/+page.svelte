@@ -1,7 +1,14 @@
 <script lang="ts">
     import AddCarForm from "$lib/components/addCarForm/AddCarForm.svelte";
     import type { PageData } from "./$types";
+    import {superForm} from "sveltekit-superforms";
+
     export let data: PageData;
+    const { form, enhance } = superForm(data.form)
 </script>
 
-<AddCarForm data="{data.form}" />
+<div class="max-w-screen-md mx-auto">
+    <form method="POST" use:enhance action="/car/add?/addCar">
+        <AddCarForm data="{form}" />
+    </form>
+</div>

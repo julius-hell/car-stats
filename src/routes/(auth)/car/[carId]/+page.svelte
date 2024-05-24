@@ -15,7 +15,7 @@
 </script>
 
 
-<div class="grid lg:grid-cols-3 gap-4 md:grid-cols-2">
+<div class="grid lg:grid-cols-3 gap-4 md:grid-cols-2 w-full">
     <div class="flex gap-4 flex-col">
         <div>
             <CarSelectCard {cars} {carId} />
@@ -24,7 +24,7 @@
             <CarInfoCard car={selectedCar} />
         </div>
     </div>
-    <div class="lg:col-span-2 gap-4 flex flex-col">
+    <div class="lg:col-span-2 gap-4 flex flex-col w-full">
         <div>
             <Card.Root>
                 <Card.Header>

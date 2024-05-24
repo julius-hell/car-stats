@@ -11,14 +11,15 @@
 
     export let data: SuperValidated<Infer<typeof formSchema>>;
 
-    const form = superForm(data, {
+    export let buttonType = "Add" as "Add" | "Update"
+
+    const form = superForm($data, {
         validators: zodClient(formSchema),
     });
 
-    const { form: formData, enhance } = form;
+    const { form: formData } = form;
 </script>
-<div class="max-w-screen-md mx-auto">
-    <form method="POST" use:enhance action="/car/add?/addCar">
+
         <Form.Field {form} name="name">
             <Form.Control let:attrs>
                 <Form.Label>Name</Form.Label>
@@ -40,6 +41,5 @@
             </Form.Control>
             <Form.FieldErrors />
         </Form.Field>
-        <Form.Button>Add Car</Form.Button>
-    </form>
-</div>
+        <Form.Button>{ buttonType } Car</Form.Button>
+

@@ -1,8 +1,12 @@
 <script lang="ts">
     import * as Card from "$lib/components/ui/card";
     import * as Select from "$lib/components/ui/select";
+    import { Button } from "$lib/components/ui/button";
+
     import { type Car } from "$lib/types/car";
     import {goto} from "$app/navigation";
+
+    import { PlusIcon } from "lucide-svelte";
 
     export let cars: Car[];
     export let carId = undefined as number | undefined;
@@ -38,6 +42,10 @@
                 {/each}
             </Select.Content>
         </Select.Root>
+        <Button class="w-full mt-2" href="/car/add">
+            <PlusIcon class="mr-4 h-4 w-4" />
+            Add new car
+        </Button>
     </Card.Content>
 </Card.Root>
 

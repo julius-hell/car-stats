@@ -22,6 +22,9 @@
     };
 
     $: options = {
+        layout: {
+            padding: 0,
+        },
         responsive: true,
         plugins: {
             legend: {
@@ -29,12 +32,16 @@
             },
         },
         scales: {
+            y: {
+              display: false,
+            },
             x: {
+                display: true,
                 type: "timeseries",
                 time: {
                     unit: "date",
                     displayFormats: {
-                        date: "dd.MM.yyyy HH:mm"
+                        date: "dd.MM"
                     }
                 },
             },
@@ -42,11 +49,14 @@
     }
 </script>
 
-<Card.Root>
+<Card.Root class="h-full">
     <Card.Header>
         <Card.Title>Mileage</Card.Title>
     </Card.Header>
     <Card.Content>
+        {#if chartData.labels.length > 0}
+                <Line width="100%" data={chartData} {options} />
+        {/if}
         <Table.Root>
             <Table.Header>
                 <Table.Row>
@@ -65,8 +75,5 @@
                 {/if}
             </Table.Body>
         </Table.Root>
-        {#if chartData.labels.length > 0}
-        <Line data={chartData} {options} />
-        {/if}
     </Card.Content>
 </Card.Root>
