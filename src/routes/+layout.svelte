@@ -1,8 +1,7 @@
 <script>
     import "../app.css";
     import { pwaInfo } from 'virtual:pwa-info';
-
-    import { CircleUserIcon } from "lucide-svelte";
+    import { ModeWatcher } from "mode-watcher";
 
     $: webManifestLink = pwaInfo ? pwaInfo.webManifest.linkTag : ''
 </script>
@@ -11,4 +10,5 @@
     {@html  webManifestLink}
 </svelte:head>
 
+<ModeWatcher />
 <slot />
