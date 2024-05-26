@@ -6,6 +6,7 @@
     import {enhance } from "$app/forms";
     import AddMileageForm from "$lib/components/addMileageForm/AddMileageForm.svelte";
     import MileageCard from "$lib/components/MileageCard.svelte";
+    import AppLayout from "$lib/components/AppLayout.svelte";
 
     export let data;
 
@@ -18,6 +19,7 @@
     <title>{selectedCar.name} | Car-Stats</title>
 </svelte:head>
 
+<AppLayout title="Dashboard" authenticated="{true}">
 <div class="grid lg:grid-cols-3 gap-4 md:grid-cols-2 w-full">
     <div class="flex gap-4 flex-col">
         <div>
@@ -45,3 +47,4 @@
         </div>
     </div>
 </div>
+</AppLayout>

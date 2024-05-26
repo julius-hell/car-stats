@@ -1,16 +1,15 @@
 <script lang="ts">
     import * as Card from "$lib/components/ui/card";
     import { Button } from "$lib/components/ui/form";
+    import AppLayout from "$lib/components/AppLayout.svelte";
 
     export let data;
 </script>
 
+<AppLayout title="Delete Car?" authenticated="{true}">
 <Card.Root>
-    <Card.Header>
-        <Card.Title>Delete car</Card.Title>
-    </Card.Header>
-    <Card.Content>
-        <p>Do you want to delete the car "{data.car.name}"? This action cannot be reversed!</p>
+    <Card.Content class="pt-6">
+        <p>Do you want to delete the car "{data.car.name}"? <b>WARNING: This action cannot be reversed!</b></p>
     </Card.Content>
     <Card.Footer>
         <form method="post" class="w-full">
@@ -18,3 +17,4 @@
         </form>
     </Card.Footer>
 </Card.Root>
+</AppLayout>
