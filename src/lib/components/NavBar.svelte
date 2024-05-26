@@ -1,7 +1,7 @@
 <script>
     import {CircleUserIcon, PencilIcon} from "lucide-svelte";
     import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
-    import {Button} from "$lib/components/ui/Button";
+    import {Button} from "$lib/components/ui/button";
 
     export let authenticated = false
 </script>
