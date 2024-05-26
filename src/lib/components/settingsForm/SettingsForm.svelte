@@ -33,6 +33,7 @@
                 <Select.Value placeholder="Select your primary car" />
             </Select.Trigger>
             <Select.Content>
+                <Select.Item value={undefined}>None</Select.Item>
                 {#each cars as car}
                     <Select.Item value={car.id}>{car.name}</Select.Item>
                 {/each}
