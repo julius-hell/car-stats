@@ -1,7 +1,8 @@
 import {db, schema} from "$lib/server/db";
 import {and, eq} from "drizzle-orm";
 import type {Car} from "$lib/types/car";
-import {carTable} from "$lib/server/schema";
+import {carTable, mileageTable} from "$lib/server/schema";
+import {getPrimaryCar, updatePrimaryCarSetting} from "$lib/server/actions/user-actions";
 
 export async function getAllCars(userId: string) {
     const cars = await db.query.carTable.findMany({
@@ -65,4 +66,23 @@ export async function createCar(userId: string, params: CarParams): Promise<void
         ...params,
         userId
     });
+}
+
+export async function deleteCar(carId: number, userId: string): Promise<void> {
+    const carExists = await checkCarExists(carId, userId);
+
+    if(!carExists) {
+        throw new Error("Car not found");
+    }
+
+    const primaryCar = await getPrimaryCar(userId);
+    if(primaryCar === carId) {
+        await updatePrimaryCarSetting(userId, null);
+    }
+
+    await db.delete(schema.carTable).where(and(
+       eq(carTable.id, carId),
+       eq(carTable.userId, userId)
+    ));
+    await db.delete(mileageTable).where(eq(mileageTable.carId, carId));
 }
