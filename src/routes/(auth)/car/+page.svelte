@@ -21,6 +21,5 @@
                 <CarInfoCard />
             </div>
         </div>
-
     </div>
 </AppLayout>
