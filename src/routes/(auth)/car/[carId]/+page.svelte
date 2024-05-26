@@ -29,16 +29,16 @@
     </div>
     <div class="lg:col-span-2 gap-4 flex flex-col w-full">
         <div>
+            <form method="post" use:enhance action="?/addMileage">
             <Card.Root>
                 <Card.Header>
                     <Card.Title>Add mileage</Card.Title>
                 </Card.Header>
                 <Card.Content>
-                    <form method="post" use:enhance action="?/addMileage">
                         <AddMileageForm data={data.addMileageFormData} />
-                    </form>
                 </Card.Content>
             </Card.Root>
+            </form>
         </div>
         <div>
             <MileageCard mileageItems={selectedCar.mileage} />

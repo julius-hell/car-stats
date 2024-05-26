@@ -33,7 +33,7 @@
         },
         scales: {
             y: {
-              display: false,
+              display: true,
             },
             x: {
                 display: true,
