@@ -3,9 +3,12 @@ import { NavigationRoute, registerRoute } from 'workbox-routing'
 
 declare let self: ServiceWorkerGlobalScope
 
+//@ts-expect-error foo
 self.addEventListener('message', (event) => {
-    if (event.data && event.data.type === 'SKIP_WAITING')
+    if (event.data && event.data.type === 'SKIP_WAITING') {
+        //@ts-expect-error foo
         self.skipWaiting()
+    }
 })
 
 // self.__WB_MANIFEST is default injection point

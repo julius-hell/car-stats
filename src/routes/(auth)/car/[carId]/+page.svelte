@@ -14,6 +14,9 @@
     $: selectedCar = data.selectedCar!;
 </script>
 
+<svelte:head>
+    <title>{selectedCar.name} | Car-Stats</title>
+</svelte:head>
 
 <div class="grid lg:grid-cols-3 gap-4 md:grid-cols-2 w-full">
     <div class="flex gap-4 flex-col">

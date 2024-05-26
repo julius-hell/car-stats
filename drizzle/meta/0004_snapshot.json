@@ -1,5 +1,5 @@
 {
-  "id": "7ea00cc9-c353-4485-824f-b094bc89c096",
+  "id": "4690c1dc-9e41-42d4-a860-e82ff6ca3447",
   "prevId": "e8355141-8196-47d5-85c4-e386ce71147a",
   "version": "6",
   "dialect": "postgresql",
@@ -154,6 +154,12 @@
         "username": {
           "name": "username",
           "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primary_car": {
+          "name": "primary_car",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         }

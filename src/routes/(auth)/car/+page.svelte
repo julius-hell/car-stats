@@ -6,6 +6,9 @@
     $: cars = data.cars;
 </script>
 
+<svelte:head>
+    <title>Dashboard | Car-Stats</title>
+</svelte:head>
 
 <div class="grid lg:grid-cols-3 gap-4 md:grid-cols-2">
     <div>

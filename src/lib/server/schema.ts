@@ -5,6 +5,7 @@ export const userTable = pgTable("user", {
     id: text("id").primaryKey(),
     githubId: integer("github_id").unique(),
     username: text("username"),
+    primaryCar: integer("primary_car"),
 });
 
 export const sessionTable = pgTable("session", {

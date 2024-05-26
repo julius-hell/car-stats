@@ -74,7 +74,7 @@
     </Card.Content>
     <Card.Footer class="justify-between">
         <Button href={editUrl}>
-            <PencilIcon  class="mr-2 h-4 w-4" />
+            <PencilIcon class="mr-2 h-4 w-4" />
             Edit
         </Button>
         <Button href={deleteUrl} variant="destructive">
