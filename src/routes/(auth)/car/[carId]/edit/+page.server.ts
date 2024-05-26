@@ -2,7 +2,6 @@ import {error, fail, redirect} from "@sveltejs/kit";
 import {superValidate} from "sveltekit-superforms";
 import {zod} from "sveltekit-superforms/adapters";
 import {formSchema} from "$lib/components/addCarForm/formSchema";
-import type {Actions} from "../../../../../../.svelte-kit/types/src/routes/(auth)/car/add/$types";
 import {getCarById, updateCar} from "$lib/server/actions/car-actions";
 
 export async function load({ locals, params }) {
@@ -16,7 +15,7 @@ export async function load({ locals, params }) {
     }
 }
 
-export const actions: Actions = {
+export const actions = {
     updateCar: async (event) => {
         const form = await superValidate(event, zod(formSchema));
         if (!form.valid) {
@@ -26,7 +25,6 @@ export const actions: Actions = {
         }
 
         const { make, model, name } = form.data;
-        // @ts-expect-error carId exists in params
         const carId = parseInt(event.params.carId, 10);
         await updateCar(carId, event.locals.user!.id, { name, make, model });
 
