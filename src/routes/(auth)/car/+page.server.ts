@@ -1,23 +1,15 @@
-import {db, schema} from "$lib/server/db";
-import {eq} from "drizzle-orm";
 import {redirect} from "@sveltejs/kit";
+import { getPrimaryCar } from "$lib/server/actions/user-actions";
+import {getAllCars} from "$lib/server/actions/car-actions";
 
 export async function load({ locals }) {
 
-    const primaryCarResult = await db.query.userTable.findFirst({
-        where: eq(schema.userTable.id, locals.user!.id),
-        columns: {
-            primaryCar: true,
-        }
-    });
-    
-    if(primaryCarResult && primaryCarResult.primaryCar) {
-        redirect(302, `/car/${primaryCarResult.primaryCar}`);
+    const primaryCar = await getPrimaryCar(locals.user!.id);
+    if(primaryCar) {
+        redirect(302, `/car/${primaryCar}`);
     }
 
-    const cars = await db.query.carTable.findMany({
-        where: eq(schema.carTable.userId, locals.user!.id)
-    })
+    const cars = await getAllCars(locals.user!.id);
 
 
 

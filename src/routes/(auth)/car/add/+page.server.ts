@@ -3,7 +3,7 @@ import { superValidate } from "sveltekit-superforms";
 import { formSchema} from "$lib/components/addCarForm/formSchema";
 import { zod} from "sveltekit-superforms/adapters";
 import {fail, redirect} from "@sveltejs/kit";
-import {db, schema} from "$lib/server/db";
+import {createCar} from "$lib/server/actions/car-actions";
 
 export const load: PageServerLoad = async () => {
     return {
@@ -20,15 +20,7 @@ export const actions: Actions = {
             });
         }
 
-        const { make, model, name } = form.data;
-
-        await db.insert(schema.carTable).values({
-            make,
-            model,
-            name,
-            userId: event.locals.user!.id!
-        });
-
+        await createCar(event.locals.user!.id, form.data);
         throw redirect(302, "/")
     }
 }

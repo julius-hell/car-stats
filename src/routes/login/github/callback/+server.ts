@@ -2,11 +2,9 @@
 import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
 import { github, lucia } from "$lib/server/auth";
-import { db } from "$lib/server/db";
-import * as schema from "$lib/server/schema";
 
 import type { RequestEvent } from "@sveltejs/kit";
-import {eq} from "drizzle-orm";
+import {createGithubUser, getUserByGithubId} from "$lib/server/actions/user-actions";
 
 export async function GET(event: RequestEvent): Promise<Response> {
     const code = event.url.searchParams.get("code");
@@ -28,10 +26,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
         });
         const githubUser: GitHubUser = await githubUserResponse.json();
 
-        // Replace this with your own DB client.
-        const existingUser = await db.query.userTable.findFirst({
-            where: eq(schema.userTable.githubId, githubUser.id)
-        });
+        const existingUser = await getUserByGithubId(githubUser.id);
 
         if (existingUser) {
             const session = await lucia.createSession(existingUser.id, {});
@@ -43,12 +38,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
         } else {
             const userId = generateIdFromEntropySize(10); // 16 characters long
 
-            // Replace this with your own DB client.
-            await db.insert(schema.userTable).values({
-                id: userId,
-                githubId: githubUser.id,
-                username: githubUser.login
-            });
+            await createGithubUser(userId, githubUser.id, githubUser.login);
 
             const session = await lucia.createSession(userId, {});
             const sessionCookie = lucia.createSessionCookie(session.id);
