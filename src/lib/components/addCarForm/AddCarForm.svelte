@@ -41,5 +41,5 @@
             </Form.Control>
             <Form.FieldErrors />
         </Form.Field>
-        <Form.Button>{ buttonType } Car</Form.Button>
+        <Form.Button class="w-full">{ buttonType } Car</Form.Button>
 

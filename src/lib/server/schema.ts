@@ -26,7 +26,8 @@ export const carTable = pgTable("car", {
     model: text("model").notNull(),
     userId: text("user_id")
         .notNull()
-        .references(() => userTable.id)
+        .references(() => userTable.id),
+    picture: text("picture"),
 });
 
 export const mileageTable = pgTable("mileage", {

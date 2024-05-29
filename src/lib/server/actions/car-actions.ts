@@ -86,3 +86,30 @@ export async function deleteCar(carId: number, userId: string): Promise<void> {
     ));
     await db.delete(mileageTable).where(eq(mileageTable.carId, carId));
 }
+
+export async function updateCarPicture(carId: number, userId: string, picture: string): Promise<void> {
+    const result = await db.update(schema.carTable).set({
+        picture
+    }).where(and(
+        eq(carTable.id, carId),
+        eq(carTable.userId, userId)
+    ));
+
+    if(result.rowCount !== 1) {
+        throw new Error("Car not found");
+    }
+}
+
+export async function getCarPicture(carId: number, userId: string): Promise<string | null> {
+    const car = await db.query.carTable.findFirst({
+        where: and(
+            eq(carTable.id, carId),
+            eq(carTable.userId, userId)
+        ),
+        columns: {
+            picture: true,
+        }
+    });
+
+    return car?.picture ?? null;
+}

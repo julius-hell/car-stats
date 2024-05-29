@@ -6,5 +6,6 @@ export interface Car {
     userId: string;
     make: string;
     model: string;
-    mileage: MileageItem[]
+    picture: string | null;
+    mileage: MileageItem[];
 }

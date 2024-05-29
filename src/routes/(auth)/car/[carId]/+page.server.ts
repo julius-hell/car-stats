@@ -3,6 +3,8 @@ import {superValidate} from "sveltekit-superforms";
 import {zod} from "sveltekit-superforms/adapters";
 import {formSchema} from "$lib/components/addMileageForm/formSchema";
 import {addMileage, checkCarExists, getAllCars, getCarById} from "$lib/server/actions/car-actions";
+import {getMinioClient} from "$lib/server/get-minio-client";
+import {env} from "$env/dynamic/private";
 
 export async function load({ locals, params }) {
     const cars = await getAllCars(locals.user!.id);
@@ -14,6 +16,11 @@ export async function load({ locals, params }) {
     const carId = parseInt(params.carId, 10);
 
     const selectedCar = await getCarById(carId, locals.user!.id);
+
+    if(selectedCar.picture) {
+        selectedCar.picture = await getMinioClient()
+            .presignedGetObject(env.PICTURES_BUCKET, selectedCar.picture, 3600);
+    }
 
     return {
         cars,
@@ -42,7 +49,6 @@ export const actions: Actions = {
         }
 
         await addMileage(carId, form.data.mileage);
-
         redirect(302, `/car/${carId}`);
     }
 }
