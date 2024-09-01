@@ -43,6 +43,13 @@
       "when": 1716919378130,
       "tag": "0005_neat_typhoid_mary",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1725207309172,
+      "tag": "0006_flat_secret_warriors",
+      "breakpoints": true
     }
   ]
 }
