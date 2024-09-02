@@ -48,7 +48,15 @@ export const actions: Actions = {
             return fail(404);
         }
 
-        await addMileage(carId, form.data.mileage);
+        let latitude = null;
+        let longitude = null;
+
+        if(form.data.includeLocation) {
+            latitude = form.data.latitude;
+            longitude = form.data.longitude;
+        }
+
+        await addMileage(carId, form.data.mileage, latitude, longitude);
         redirect(302, `/car/${carId}`);
     }
 }

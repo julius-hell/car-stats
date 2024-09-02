@@ -40,10 +40,12 @@ export async function checkCarExists(carId: number, userId: string) {
     return car !== undefined;
 }
 
-export async function addMileage(carId: number, mileage: number) {
+export async function addMileage(carId: number, mileage: number, latitude: number | null, longitude: number | null) {
     await db.insert(schema.mileageTable).values({
         carId,
-        mileage
+        mileage,
+        latitude,
+        longitude,
     })
 }
 

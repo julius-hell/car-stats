@@ -7,7 +7,6 @@
     import AddMileageForm from "$lib/components/addMileageForm/AddMileageForm.svelte";
     import MileageCard from "$lib/components/MileageCard.svelte";
     import AppLayout from "$lib/components/AppLayout.svelte";
-
     export let data;
 
     $: cars = data.cars;

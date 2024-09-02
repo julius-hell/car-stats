@@ -5,6 +5,7 @@
     export let data;
 
     $: cars = data.cars;
+
 </script>
 
 <svelte:head>
