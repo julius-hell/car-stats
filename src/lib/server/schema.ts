@@ -1,4 +1,4 @@
-import {integer, pgTable, serial, text, timestamp} from "drizzle-orm/pg-core";
+import {decimal, integer, pgTable, serial, text, timestamp} from "drizzle-orm/pg-core";
 import {relations} from "drizzle-orm";
 
 export const userTable = pgTable("user", {
@@ -34,8 +34,8 @@ export const mileageTable = pgTable("mileage", {
     id: serial("id").notNull().primaryKey(),
     carId: serial("car_id").notNull(),
     mileage: integer("mileage").notNull(),
-    latitude: integer("latitude"),
-    longitude: integer("longitude"),
+    latitude: decimal("latitude"),
+    longitude: decimal  ("longitude"),
     created: timestamp("timestamp").notNull().defaultNow(),
 });
 

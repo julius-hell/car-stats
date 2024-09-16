@@ -50,6 +50,13 @@
       "when": 1725207309172,
       "tag": "0006_flat_secret_warriors",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1725299859910,
+      "tag": "0007_new_rocket_racer",
+      "breakpoints": true
     }
   ]
 }
