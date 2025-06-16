@@ -1,8 +1,9 @@
 import { lucia } from "$lib/server/auth";
-
+import { logger } from "$lib/hooks/logger.server";
 import type { Handle } from "@sveltejs/kit";
+import { sequence } from "@sveltejs/kit/hooks";
 
-export const handle: Handle = async ({ event, resolve }) => {
+export const auth = async ({ event, resolve }) => {
     const sessionId = event.cookies.get(lucia.sessionCookieName);
     if (!sessionId) {
         event.locals.user = null;
@@ -29,3 +30,5 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.locals.session = session;
     return resolve(event);
 };
+
+export const handle: Handle = sequence(logger, auth);
